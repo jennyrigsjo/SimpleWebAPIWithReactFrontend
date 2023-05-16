@@ -1,0 +1,26 @@
+body {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.App, table, .orders, .order-details {
+    width: 100%;
+}
+
+.orders {
+    margin-bottom: 5em;
+}
+
+.order-details {
+    background-color: lightgray;
+    padding: 1em;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 20px 10px;
+}
+
+th {
+    text-align: left;
+}
