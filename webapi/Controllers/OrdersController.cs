@@ -19,9 +19,7 @@ public class OrdersController : ControllerBase
     [HttpGet]
     public List<Order> GetOrders()
     {
-        XmlDocument doc = new XmlDocument();
-        doc.Load(string.Concat(_env.WebRootPath, "/orders.xml"));
-        XmlNodeList? orderNodes = doc.SelectNodes("/Root/Orders/Order");
+        var orderNodes = GetOrdersFromXml();
 
         List<Order> orders = new List<Order>();
 
@@ -50,9 +48,7 @@ public class OrdersController : ControllerBase
     [HttpGet("{orderNumber}")]
     public ActionResult<OrderDetails> GetOrderDetails(string orderNumber)
     {
-        XmlDocument doc = new XmlDocument();
-        doc.Load(string.Concat(_env.WebRootPath, "/orders.xml"));
-        XmlNodeList? orderNodes = doc.SelectNodes("/Root/Orders/Order");
+        var orderNodes = GetOrdersFromXml();
 
         if (orderNodes != null)
         {
@@ -96,6 +92,16 @@ public class OrdersController : ControllerBase
         }
 
         return NotFound();
+    }
+
+
+    private XmlNodeList GetOrdersFromXml()
+    {
+        XmlDocument doc = new XmlDocument();
+        doc.Load(string.Concat(_env.WebRootPath, "/orders.xml"));
+        XmlNodeList? orders = doc.SelectNodes("/Root/Orders/Order");
+
+        return orders;
     }
 
 }
